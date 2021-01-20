@@ -29,16 +29,31 @@ class Food:
 
 
 for key, value in foods.items():
-    print("Name:",key)
-    print("Prep time:",value[0], "mins")
-    print("Is Veggie?", 'Yes' if value[1] else "No")
-    print("Food Type:", value[2])
-    print("Cuisine:", value[3])
-    for item in value[4]:
-        print(item, end=', ')
-    print()
-    print("recipe", value[5])
-    print("***")
+    name = key
+    prep_time = value[0]
+    is_veggie = 'Yes' if value[1] else "No"
+    
+    food_type = value[2]
+    cuisine = value[3]
+
+    ingredients = []
+    for ingredient in value[4]:
+        ingredients.append(ingredient)
+        # print(item, end=', ')
+    recipe = value[5]
+
+    food = Food(name, prep_time, is_veggie, food_type, cuisine, ingredients, recipe)
+    print(food.name)
+    # print("Name:",key)
+    # print("Prep time:",value[0], "mins")
+    # print("Is Veggie?", 'Yes' if value[1] else "No")
+    # print("Food Type:", value[2])
+    # print("Cuisine:", value[3])
+    # for item in value[4]:
+    #     print(item, end=', ')
+    # print()
+    # print("recipe", value[5])
+    # print("***")
 
 
 
