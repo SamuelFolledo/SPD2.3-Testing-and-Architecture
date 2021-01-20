@@ -16,6 +16,18 @@ foods = {'butternut squash soup':[45, True, 'soup','North African',\
                 'seasoning 3. Add all the content to a sausage stuffer. Put the casing on'
                 "the stuffer funnel. Rotate the stuffer's handle (or turn it on) to make your yummy sausages!"]}
 
+class Food:
+    def __init__(self, name, prep_time, is_veggie, food_type, 
+                cuisine, ingredients, recipe):
+        self.name = name
+        self.prep_time = prep_time
+        self.is_veggie = is_veggie
+        self.food_type = food_type
+        self.cuisine = cuisine
+        self.ingredients = ingredients
+        self.recipe = recipe
+
+
 for key, value in foods.items():
     print("Name:",key)
     print("Prep time:",value[0], "mins")
