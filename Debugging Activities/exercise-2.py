@@ -6,15 +6,20 @@ Exercise 2
 #
 # TODO: Gather information about the source of the error and paste your findings here. E.g.:
 # - What is the expected vs. the actual output?
+#   - answer2 should be false
 # - What error message (if any) is there?
+#   - no errror message other than wrong output
 # - What line number is causing the error?
+#   - function returns on the first iteration of the loop when if is wrong
 # - What can you deduce about the cause of the error?
+#   - Developer did not create a container
 
 
 # PART 2: State Assumptions
 #
 # TODO: State your assumptions here or say them out loud to your partner ...
 # Make sure to be SPECIFIC about what each of your assumptions is!
+# User forgot the fact to either continue looping if the if statement is false
 
 def contains_3_consecutive(list_of_nums):
     """Return True if the list contains 3 consecutive numbers each increasing by 1."""
