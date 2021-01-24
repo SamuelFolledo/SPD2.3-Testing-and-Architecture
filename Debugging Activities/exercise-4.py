@@ -18,23 +18,24 @@ Exercise 4
 # HINT: It may help to draw a picture to clarify what your assumptions are.
 
 def binary_search(arr, element, low=0, high=None):
-      """Returns the index of the given element within the array by performing a binary search."""
+    """Returns the index of the given element within the array by performing a binary search."""
+    
     if high == None:
         high = len(arr) - 1
 
     if high < low:
         return -1
 
-    mid = (high + low) // 2
+    mid = (high + low) // 2 # get the mid number and round up
 
     if arr[mid] == element: 
         return mid
 
     elif arr[mid] > element:
-        return binary_search(arr, element, low, mid)
+        return binary_search(arr, element, low, mid - 1)
 
     else: 
-        return binary_search(arr, element, mid, high)
+        return binary_search(arr, element, mid + 1, high)
 
 
 if __name__ == '__main__':
