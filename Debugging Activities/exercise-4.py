@@ -6,9 +6,13 @@ Exercise 4
 #
 # TODO: Gather information about the source of the error and paste your findings here. E.g.:
 # - What is the expected vs. the actual output?
+#   - searching for 7, it is expected to get index 4, but output is infinite recursion
 # - What error message (if any) is there?
+#   - RecursionError: maximum recursion depth exceeded while calling a Python object
 # - What line number is causing the error?
+#   - calling binary_search again and again
 # - What can you deduce about the cause of the error?
+#   - Developer did not update the mid's index
 
 
 # PART 2: State Assumptions
@@ -16,6 +20,7 @@ Exercise 4
 # TODO: State your assumptions here or say them out loud to your partner ...
 # Make sure to be SPECIFIC about what each of your assumptions is!
 # HINT: It may help to draw a picture to clarify what your assumptions are.
+#   - Developer assumed to pass the mid as the low or high despite of making sure that the mid does not contain the element we are looking for
 
 def binary_search(arr, element, low=0, high=None):
     """Returns the index of the given element within the array by performing a binary search."""
