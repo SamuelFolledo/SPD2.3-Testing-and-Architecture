@@ -21,6 +21,8 @@ Exercise 3
 # Make sure to be SPECIFIC about what each of your assumptions is!
 # HINT: It may help to draw a picture to clarify what your assumptions are.
 
+# What is insertion sort: https://www.youtube.com/watch?v=JU767SDMDvA
+
 def insertion_sort(arr):
     """Performs an Insertion Sort on the array arr."""
     for i in range(1, len(arr)-1):
