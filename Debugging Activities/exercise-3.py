@@ -6,9 +6,13 @@ Exercise 3
 #
 # TODO: Gather information about the source of the error and paste your findings here. E.g.:
 # - What is the expected vs. the actual output?
+#   - expected a sorted number but got an error instead
 # - What error message (if any) is there?
+#   - Error message is "IndexError: list index out of range"
 # - What line number is causing the error?
+#   - while key < arr[j]
 # - What can you deduce about the cause of the error?
+#   - Developer does not know how to insert error 
 
 
 # PART 2: State Assumptions
@@ -19,14 +23,18 @@ Exercise 3
 
 def insertion_sort(arr):
     """Performs an Insertion Sort on the array arr."""
-    for i in range(1, len(arr)):
+    for i in range(1, len(arr)-1):
         key = arr[i] 
 
         j = i-1
-        while key < arr[j] : 
+        print(key, j)
+        while key < arr[j] :
+            print(key, " is less than ", arr[j])
             arr[j+1] = arr[j] 
             j -= 1
+            print("arr =", arr)
         arr[j+1] = key
+        print("Now ", arr)
     return arr
 
 if __name__ == '__main__':
