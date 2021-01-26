@@ -1,24 +1,33 @@
-# Debugging Exercises
+# Debugging Techniques Lab
 
-## Part 1: Gather Information
+You've been hired as a software engineer at a new company. Their previous engineer quit unexpectedly, and left some code that... isn't exactly production-ready.
 
-For each of the exercises, run the code and **gather as much information as you can** about the source of the error, based on the code's output. For example, you may want to answer the questions:
+For each of the following 3 exercises, your job is to use the techniques covered in class to locate and find the bug(s). 
 
-- What is the expected vs. the actual output?
-- What error message (if any) is there?
-- What line number is causing the error?
-- What can you deduce about the cause of the error?
+## Exercise 1 - Flask Pizza Shop
 
-**You don't actually need to find and fix the error yet!** We'll do that in the next step.
+The first exercise is a pizza shop written in Flask and Flask-SQLAlchemy. It should be partially working - the previous engineer left it in a good enough state that you can see a homepage and a "New Order" page. However, new pizzas aren't being added to the homepage, and customers are waiting at the door to place their orders!
 
-If you have trouble with this part, you can check out `example.py` to see how to do it.
+**As you debug, write down the steps you take in `debug_log.md`.** You'll submit this as your homework assignment.
 
-## Part 2: State Assumptions
+**Your job is to get the "New Order" page in working order**, so that new pizza orders are displayed correctly on the homepage. Make sure to watch out for multiple bugs!
 
-For each of the exercises, read over the code line-by-line with a partner. For each line of code, **state any assumptions you have** about how the code behaves. E.g. "the `i` variable is set to the index of the next element." For each assumption, **add a print statement** to the code to verify that your assumption is accurate. E.g. you can print out the `i` variable and check its value(s) against what you expect.
+## Exercise 2 - Weather API
 
-If you have trouble with this part, you can check out `example.py` to see how to do it.
+The second exercise is a Flask application that tells you what the weather is in your city. The first page should be functional, but once you click the submit button, there are a few bugs to work out.
 
-## Submission Instructions
+**As you debug, write down the steps you take in `debug_log.md`.** You'll submit this as your homework assignment.
 
-After you finish the exercises, submit your code on [Gradescope](https://www.gradescope.com/courses/206382/assignments/949586/) under "Homework 1: Debugging Steps Lab". Your instructor will grade your work based on completion.
+**Your job is to get the Results page in working order**, so that it correctly shows the weather in the user's city and uses the given units of measurement. Make sure to watch out for multiple bugs!
+
+## Exercise 3 - Searching/Sorting
+
+The third exercise contains a searching & sorting algorithm. The `main.py` file contains some test code that isn't quite working yet. **If you can, try to solve this one without looking up solutions to the algorithms.** 
+
+**As you debug, write down the steps you take in `debug_log.md`.** You'll submit this as your homework assignment.
+
+**Your job is to get the `merge_sort` and `binary_search` functions in working order**, so that they correctly compute the sorted list and the index of the given element. Make sure to watch out for multiple bugs!
+
+## Submission
+
+You will need to submit `debug_log.md` to Gradescope as your homework.
