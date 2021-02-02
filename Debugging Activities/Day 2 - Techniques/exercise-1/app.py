@@ -34,7 +34,7 @@ class Pizza(db.Model):
     order_name = db.Column(db.String(80), unique=False, nullable=False)
     size = db.Column(db.Enum(PizzaSize), nullable=False)
     crust_type = db.Column(db.Enum(CrustType), nullable=False)
-    toppings = db.relationship('PizzaTopping')
+    toppings = db.relationship('PizzaTopping') #not a list
     fulfilled = db.Column(db.Boolean, default=False)
 
 class PizzaTopping(db.Model):
@@ -64,10 +64,11 @@ def pizza_order_form():
 
 @app.route('/order', methods=['POST'])
 def pizza_order_submit():
-    order_name = request.form.get('name')
-    pizza_size_str = request.form.get('size')
+    order_name = request.form.get('order_name') #change name to order_name
+    # pizza_size_str = request.form.get('size') #must match the name in the html line // <input type="radio" name="pizza_size" value="{{ size.name }}"> 
+    pizza_size_str = request.form.get('pizza_size') #changed 'size' to pizza_size
     crust_type_str = request.form.get('crust_type')
-    toppings_list = request.form.get('toppings')
+    toppings_list = request.form.getlist('toppings') #change request.form.get to getlist to get the list of toppings
 
     pizza = Pizza(
         order_name=order_name,
@@ -75,17 +76,20 @@ def pizza_order_submit():
         crust_type=crust_type_str)
     print(pizza.size)
 
-    for topping_str in ToppingType:
+    for topping_str in toppings_list:
         # pizza.toppings.append(PizzaTopping(topping=topping_str)) //change this
         pizza.toppings.append(PizzaTopping(topping_type=topping_str))
 
+    print("Adding Pizza: ", pizza)
     db.session.add(pizza)
+    db.session.commit() #add this line to commit changes to the database
+    print("pizza added!")
 
     flash('Your order has been submitted!')
     # return redirect(url_for('/')) //change this to call the function
-    return redirect(url_for('fullfill_order'))
+    return redirect(url_for('home'))
 
-@app.route('/fulfill', methods=['POST'])
+@app.route('/fulfill', methods=['GET']) #change POST to GET because redirect is a GET request
 def fulfill_order():
     pizza_id = request.form.get('pizza_id')
     print("Pizza id:", pizza_id)
