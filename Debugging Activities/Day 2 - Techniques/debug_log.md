@@ -26,6 +26,14 @@ _Then I noticed another bug ..._
 
 `flask run`
 
+**Fixes on `app.py`**
+- In `pizza_order_submit()` method, change the form keys to match the with `home.html`
+    - name to order_name
+    - size to pizza_size
+- Still in `pizza_order_submit()`, use `getlist` of toppings instead of a regular `get`
+- Still in `pizza_order_submit()`, commit the database changes after adding the pizza
+- Still in `pizza_order_submit()`, change the redirect url to `'home'`
+- For `fulfill_order()`, change the route's method from POST to GET request
 
 
 ## Exercise 2
