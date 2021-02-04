@@ -36,27 +36,31 @@ def get_letter_for_units(units):
 @app.route('/results')
 def results():
     """Displays results for current weather conditions."""
-    city = request.args.get('users_city')
-    units = request.args.get('requested_units')
+    city = request.args.get('city') # changed this from users_city to city
+    units = request.args.get('units') # changed this from requested_units to units
 
-    url = 'http://api.openweathermap.org/data/2.5/weather'
+    # according the openweathermap documentation, url should look like this
+    # http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={API key}
+    url = 'http://api.openweathermap.org/data/2.5/weather?' # add a "?" at the end of the url
+
+    # according to the documentation https://openweathermap.org/current, parameter keys needs to be fixed
     params = {
+        'q': city, # place is changed to q and needs to be the first thing inside the dictionary
         'appid': API_KEY,
-        'place': city,
         'units': units
     }
     result_json = requests.get(url, params=params).json()
-
+    print("JSON ", result_json)
     context = {
         'date': datetime.now(),
         'city': result_json['name'],
         'description': result_json['weather'][0]['description'],
-        'temp': result_json['main']['temperature'],
+        'temp': result_json['main']['temp'], # change temperature to temp
         'humidity': result_json['main']['humidity'],
         'wind_speed': result_json['wind']['speed'],
         'units_letter': get_letter_for_units(units)
     }
-
+    print("Context ", context)
     return render_template('results.html', **context)
 
 
