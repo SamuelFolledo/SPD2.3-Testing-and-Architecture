@@ -38,8 +38,18 @@ _Then I noticed another bug ..._
 
 ## Exercise 2
 
-[[Your answer goes here!]]
+- Had to install dotenv by running the following command
+`pip3 install python-dotenv`
+- Create a `.env` file to store your API keys like so
+`API_KEY=7e247499e6bbed93c3bd35baf2018838`
+- Fixed `results()` method
+    - updated `'users_city'` to `'city'` and `'requested_units'` to `'units'` to match with the home.html
+    - add '?' to url
+    - updated parameters to match with what the [documentation](https://openweathermap.org/current) keys
+    - updated context passed to results.html file to have the right key for the temperature
+
 
 ## Exercise 3
 
-[[Your answer goes here!]]
+- In `merge_sort()` changed `right_side[i]` to `right_side[j]`
+- In `binary_search()`, updated `mid` by using `//` to get the whole number when dividing
