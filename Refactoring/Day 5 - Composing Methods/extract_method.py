@@ -16,6 +16,7 @@ def print_stat():
     print('****** END ******')
 
 def get_user_inputs():
+    """ Get the inputs from the user """
     grade_list = []
     n_student = 5
     for _ in range(0, n_student):
@@ -23,6 +24,7 @@ def get_user_inputs():
     return grade_list
 
 def calculate_mean(grade_list):
+    """ Calculate the mean of a list """
     total = 0
     for grade in grade_list:
         total += grade
@@ -30,6 +32,7 @@ def calculate_mean(grade_list):
     return mean
 
 def calculate_standard_deviation(grade_list):
+    """ Calculate the standard deviation of a list """
     mean = calculate_mean(grade_list)
     sd = 0 # standard deviation
     sum_of_sqrs = 0
