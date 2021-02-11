@@ -8,16 +8,10 @@ class Person:
         self.age = my_age
         
 def enter_night_club(individual):
-    if is_drinking_age(individual.age):
+    if individual.age > LEGAL_DRINKING_AGE:
         print("Allowed to enter.")
     else:
-        print("Enterance of minors is denited.")
-
-def is_drinking_age(age):
-    if age > LEGAL_DRINKING_AGE:
-        return True
-    return False
-    
+        print("Enterance of minors is denied.")    
     
 person = Person(17.9)
 enter_night_club(person)
