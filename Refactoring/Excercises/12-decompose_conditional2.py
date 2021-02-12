@@ -3,19 +3,31 @@
 # Reference: https://www.healthline.com/health/high-cholesterol/levels-by-age
 
 # Blood test analysis program
-total_cholostrol = 70
+total_cholestrol = 70
 ldl = 30
 triglyceride = 120
 
-if total_cholostrol < 200 and ldl < 100 and triglyceride < 150:
+low_cholesterol = total_cholestrol < 200
+low_ldl = ldl < 100
+low_triglyceride = triglyceride < 150
+
+medium_cholesterol = 200 < total_cholestrol < 240
+medium_ldl = 130 < ldl < 160
+medium_triglyceride = 150 <= triglyceride < 200
+
+high_cholesterol = 200 < total_cholestrol > 240
+high_ldl = ldl > 160
+high_triglyceride = triglyceride >= 200
+
+if low_cholesterol and low_ldl and low_triglyceride:
     # good level
     print('*** Good level of cholestrol ***')
-elif 200 < total_cholostrol > 240 or ldl > 160 or triglyceride >= 200:
+elif high_cholesterol or high_ldl or high_triglyceride:
     # High cholestrol level
     print('*** High cholestrol level ***')
     print('start taking pills such as statins')
     print('start TLC diet')
-elif 200 <total_cholostrol < 240 or 130 < ldl < 160 or 150 <= triglyceride < 200:
+elif medium_cholesterol or medium_ldl or medium_triglyceride:
     #TLC_diet
     print('*** Borderline to moderately elevated ***')
     print("Start TLC diet")
