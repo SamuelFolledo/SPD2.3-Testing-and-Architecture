@@ -1,30 +1,33 @@
 class Subject:
     """Represents what is being observed"""
   
-    def __init__(self): 
-        """create an empty observer list"""
-        self.observers = [] 
+    # def __init__(self): 
+    #     """create an empty observer list"""
+    #     self.observers = [] 
   
     # Both of the following two methods take an
     # observer as an argument; that is, the observer
     # to be registered ore removed.
     def registerObserver(self, observer):
-        if observer not in self.observers:
-            self.observers.append(observer)
+        pass
+        # if observer not in self.observers:
+        #     self.observers.append(observer)
     
     def removeObserver(self, observer):
-        """Remove the observer from the observer list"""
-        try: 
-            self.observers.remove(observer) 
-        except ValueError: 
-            pass
+        pass
+        # """Remove the observer from the observer list"""
+        # try: 
+        #     self.observers.remove(observer) 
+        # except ValueError: 
+        #     pass
     
     # This method is called to notify all observers
     # when the Subject's state (measuremetns) has changed.
     def notifyObservers(self):
-        """Notify the observers"""
-        for observer in self.observers: 
-            observer.update(self)
+        pass
+        # """Notify the observers"""
+        # for observer in self.observers: 
+        #     observer.update(self)
     
 # The observer class is implemented by all observers,
 # so they all have to implemented the update() method. Here
@@ -170,7 +173,9 @@ class WeatherStation:
         # un-register the observer
         weather_data.removeObserver(current_display)
         weather_data.setMeasurements(120, 100,1000)
-    
+
+        weather_data.removeObserver(forecast_display)
+        weather_data.removeObserver(statistics_display)
         
  
 if __name__ == "__main__":
