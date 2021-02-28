@@ -33,3 +33,11 @@ if is_cookeding_criteria_satisfied(time, temp, pressure, desired_state):
     print('cooking is done.')
 else:
     print('ongoing cooking.')
+
+
+class Cooking:
+    def __init__(self, time, temp, pressure, desired_state):
+        self.time = time
+        self.temp = temp
+        self.pressure = pressure
+        self.desired_state = desired_state
