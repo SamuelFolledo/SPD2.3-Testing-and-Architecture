@@ -2,6 +2,7 @@
 # Example for Compose Methods: Extract Method.
 # Refactored.
 import math 
+import pytest
 
 def display_grade_stat():
     """Gathers stats and print them out."""
@@ -39,4 +40,15 @@ def print_stat(mean, sd):
     print('The population standard deviation of grades is: ', round(sd, 3))
     print('****** END ******')
 
-display_grade_stat()
+# display_grade_stat()
+
+# TESTS
+@pytest.mark.parametrize("grade_list,expected_mean,expected_sd", [
+    ([10, 10, 10, 10], 10, 0),
+])
+def test_calculate_stat(grade_list, expected_mean, expected_sd):
+    """Test the function works on a Continuous uniform distribution
+    (aka one where all the values are the same)."""
+    actual_mean, actual_sd = calculate_stat(grade_list)
+    assert actual_mean == expected_mean
+    assert actual_sd == expected_sd
