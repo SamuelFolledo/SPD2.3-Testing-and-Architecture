@@ -9,6 +9,8 @@
 
 import random
 
+BOARD_LENGTH = 10
+
 def draw_board(board):
     """ 
         This function prints out the board that it was passed.
@@ -62,20 +64,19 @@ def is_winner(bo, le):
         We use bo instead of board and le instead of letter so we don’t have to type as much.
     """
     return ((bo[7] == le and bo[8] == le and bo[9] == le) or # across the top
-    (bo[4] == le and bo[5] == le and bo[6] == le) or # across the middle    # TODO: Fix the indentation of this lines and the following ones.
-    (bo[1] == le and bo[2] == le and bo[3] == le) or # across the bottom
-    (bo[7] == le and bo[4] == le and bo[1] == le) or # down the left side
-    (bo[8] == le and bo[5] == le and bo[2] == le) or # down the middle
-    (bo[9] == le and bo[6] == le and bo[3] == le) or # down the right side
-    (bo[7] == le and bo[5] == le and bo[3] == le) or # diagonal
-    (bo[9] == le and bo[5] == le and bo[1] == le)) # diagonal
+            (bo[4] == le and bo[5] == le and bo[6] == le) or # across the middle    # TODO: Fix the indentation of this lines and the following ones.
+            (bo[1] == le and bo[2] == le and bo[3] == le) or # across the bottom
+            (bo[7] == le and bo[4] == le and bo[1] == le) or # down the left side
+            (bo[8] == le and bo[5] == le and bo[2] == le) or # down the middle
+            (bo[9] == le and bo[6] == le and bo[3] == le) or # down the right side
+            (bo[7] == le and bo[5] == le and bo[3] == le) or # diagonal
+            (bo[9] == le and bo[5] == le and bo[1] == le)) # diagonal
 
 def get_board_copy(board):
     """ Make a duplicate of the board list and return it the duplicate. """
     dupe_board = []
-    for i in range(0, len(board)): # TODO: Clean this mess!
-        dupe_board.append(board[i])
-
+    for item in board: # TODO: Clean this mess!
+        dupe_board.append(item)
     return dupe_board
 
 def is_space_free(board, move):
@@ -84,11 +85,11 @@ def is_space_free(board, move):
 
 def get_player_move(board):
     """ Let the player type in their move. """
-    move = ' ' # TODO: W0621: Redefining name 'move' from outer scope. Hint: Fix it according to https://stackoverflow.com/a/25000042/81306
-    while move not in '1 2 3 4 5 6 7 8 9'.split() or not is_space_free(board, int(move)):
+    player_move = ' ' # TODO: W0621: Redefining name 'move' from outer scope. Hint: Fix it according to https://stackoverflow.com/a/25000042/81306
+    while player_move not in '1 2 3 4 5 6 7 8 9'.split() or not is_space_free(board, int(player_move)):
         print('What is your next move? (1-9)')
-        move = input()
-    return int(move)
+        player_move = input()
+    return int(player_move)
 
 def choose_random_move_from_list(board, movesList):
     """
@@ -99,30 +100,30 @@ def choose_random_move_from_list(board, movesList):
     for i in movesList:
         if is_space_free(board, i):
             possible_moves.append(i)
-
-    if len(possible_moves) != 0: # TODO: How would you write this pythanically? (You can google for it!)
+    if possible_moves: # TODO: How would you write this pythonically? (You can google for it!)
+        # Note: Conditional above works because empty sequences are false
         return random.choice(possible_moves)
-    else: # TODO: is this 'else' necessary?
-        return None
+    # TODO: is this 'else' necessary?
+    return None
 
-def get_computer_move(board, computer_letter): # TODO: W0621: Redefining name 'computer_letter' from outer scope. Hint: Fix it according to https://stackoverflow.com/a/25000042/81306
+def get_computer_move(board, opponent_letter): # TODO: W0621: Redefining name 'computerLetter' from outer scope. Hint: Fix it according to https://stackoverflow.com/a/25000042/81306
     """ Given a board and the computer's letter, determine where to move and return that move. """
-    if computer_letter == 'X':
+    if opponent_letter == 'X':
         player_letter = 'O'
     else:
         player_letter = 'X'
 
     # Here is our algorithm for our Tic Tac Toe AI:
     # First, check if we can win in the next move
-    for i in range(1, 10):
+    for i in range(1, BOARD_LENGTH):
         copy = get_board_copy(board)
         if is_space_free(copy, i):
-            make_move(copy, computer_letter, i)
-            if is_winner(copy, computer_letter):
+            make_move(copy, opponent_letter, i)
+            if is_winner(copy, opponent_letter):
                 return i
 
     # Check if the player could win on their next move, and block them.
-    for i in range(1, 10):
+    for i in range(1, BOARD_LENGTH):
         copy = get_board_copy(board)
         if is_space_free(copy, i):
             make_move(copy, player_letter, i)
@@ -131,7 +132,7 @@ def get_computer_move(board, computer_letter): # TODO: W0621: Redefining name 'c
 
     # Try to take one of the corners, if they are free.
     move = choose_random_move_from_list(board, [1, 3, 7, 9])
-    if move != None: # TODO: Fix it (Hint: Comparisons to singletons like None should always be done with is or is not, never the equality/inequality operators.)
+    if move is not None: # TODO: Fix it (Hint: Comparisons to singletons like None should always be done with is or is not, never the equality/inequality operators.)
         return move
 
     # Try to take the center, if it is free.
@@ -143,7 +144,7 @@ def get_computer_move(board, computer_letter): # TODO: W0621: Redefining name 'c
 
 def is_board_full(board):
     """ Return True if every space on the board has been taken. Otherwise return False. """
-    for i in range(1, 10):
+    for i in range(1, BOARD_LENGTH):
         if is_space_free(board, i):
             return False
     return True
@@ -157,8 +158,8 @@ print('Welcome to Tic Tac Toe!')
 
 while True:
     """ Reset the board """
-    the_board = [' '] * 10 # TODO: Refactor the magic number in this line (and all of the occurrences of 10 thare are conceptually the same.)
-    player_letter, computer_letter = input_player_letter()
+    the_board = [' '] * BOARD_LENGTH # TODO: Refactor the magic number in this line (and all of the occurrences of 10 thare are conceptually the same.)
+    player_letter, opponent_letter = input_player_letter()
     turn = who_goes_first()
     print('The ' + turn + ' will go first.')
     game_is_playing = True # TODO: Study how this variable is used. Does it ring a bell? (which refactoring method?) 
@@ -186,10 +187,10 @@ while True:
 
         else:
             # Computer’s turn.
-            move = get_computer_move(the_board, computer_letter)
-            make_move(the_board, computer_letter, move)
+            move = get_computer_move(the_board, opponent_letter)
+            make_move(the_board, opponent_letter, move)
 
-            if is_winner(the_board, computer_letter):
+            if is_winner(the_board, opponent_letter):
                 draw_board(the_board)
                 print('The computer has beaten you! You lose.')
                 game_is_playing = False
