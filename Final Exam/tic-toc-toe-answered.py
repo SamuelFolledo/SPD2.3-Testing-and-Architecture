@@ -149,6 +149,52 @@ def is_board_full(board):
             return False
     return True
 
+def did_win(move, board, letter):
+    """
+        Applies the move on board and returns 
+        - True if the move resulted to a win
+        - False if move resulted to a tie
+        - None if game did not end
+    """
+    make_move(board, letter, move)
+    if is_winner(board, letter):
+        draw_board(board)
+        return True
+    if is_board_full(board):
+        draw_board(board)
+        print('The game is a tie!')
+        return False
+    return None
+
+def play_new_game():
+    """ Starts a new game. """
+    the_board = [' '] * BOARD_LENGTH # TODO: Refactor the magic number in this line (and all of the occurrences of 10 thare are conceptually the same.)
+    player_letter, opponent_letter = input_player_letter()
+    turn = who_goes_first()
+    print('The ' + turn + ' will go first.')
+    while not is_board_full(the_board):
+        if turn == 'player':
+            # Player’s turn.
+            draw_board(the_board)
+            move = get_player_move(the_board)
+            did_player_win = did_win(move, the_board, player_letter)
+            if did_player_win is None:
+                turn = 'computer'
+                continue
+            if did_player_win:
+                print('Hooray! You have won the game!')
+            break
+
+        else:
+            # Computer’s turn.
+            move = get_computer_move(the_board, opponent_letter)
+            did_computer_win = did_win(move, the_board, opponent_letter)
+            if did_computer_win is None:
+                turn = 'player'
+                continue
+            if did_computer_win:
+                print('The computer has beaten you! You lose.')
+            break
 
 print('Welcome to Tic Tac Toe!')
 
@@ -157,50 +203,6 @@ print('Welcome to Tic Tac Toe!')
 # for refactoring.
 
 while True:
-    """ Reset the board """
-    the_board = [' '] * BOARD_LENGTH # TODO: Refactor the magic number in this line (and all of the occurrences of 10 thare are conceptually the same.)
-    player_letter, opponent_letter = input_player_letter()
-    turn = who_goes_first()
-    print('The ' + turn + ' will go first.')
-    game_is_playing = True # TODO: Study how this variable is used. Does it ring a bell? (which refactoring method?) 
-                         #       See whether you can get rid of this 'flag' variable. If so, remove it.
-
-    while game_is_playing: # TODO: Usually (not always), loops (or their content) are good candidates to be extracted into their own function.
-                         #       Use a meaningful name for the function you choose.
-        if turn == 'player':
-            # Player’s turn.
-            draw_board(the_board)
-            move = get_player_move(the_board)
-            make_move(the_board, player_letter, move)
-
-            if is_winner(the_board, player_letter):
-                draw_board(the_board)
-                print('Hooray! You have won the game!')
-                game_is_playing = False
-            else:  # TODO: is this 'else' necessary?
-                if is_board_full(the_board):
-                    draw_board(the_board)
-                    print('The game is a tie!')
-                    break
-                else:  # TODO: Is this 'else' necessary?
-                    turn = 'computer'
-
-        else:
-            # Computer’s turn.
-            move = get_computer_move(the_board, opponent_letter)
-            make_move(the_board, opponent_letter, move)
-
-            if is_winner(the_board, opponent_letter):
-                draw_board(the_board)
-                print('The computer has beaten you! You lose.')
-                game_is_playing = False
-            else:     # TODO: is this 'else' necessary?
-                if is_board_full(the_board):
-                    draw_board(the_board)
-                    print('The game is a tie!')
-                    break
-                else: # TODO: Is this 'else' necessary?
-                    turn = 'player'
-
+    play_new_game()
     if not play_again():
         break
